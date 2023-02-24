@@ -1,4 +1,4 @@
-class Order
+class Welcome
   attr_accessor :date, :amount
 
   def initialize(date, amount)
@@ -7,7 +7,7 @@ class Order
   end
 end
 
-class Shop
+class View
   def initialize
     @orders = []
   end
@@ -31,9 +31,9 @@ class Shop
       when "1"
         create_order
       when "2"
-        print_day_details
+        day_details
       when "3"
-        print_month_details
+        month_details
       when "q", "quit"
         break
       else
@@ -45,13 +45,13 @@ class Shop
 
   require "date"
   def create_order
-    puts "Create New Order: "
+    puts "Create New Order:"
     str = gets.chomp.split
     # date = Date.strptime(str, '%d-%m-%Y')
     date = str[0]
     amount = str[1].to_i
     # amount = gets.chomp.to_i
-    order = Order.new(date, amount)
+    order = Welcome.new(date, amount)
     @orders << order
     puts "\nToday's Details: #{order.date}"
     puts "Total Order #: #{@orders.length}"
@@ -61,7 +61,7 @@ class Shop
     puts "Average Order: #{average_order}"
   end
 
-  def print_day_details
+  def day_details
     puts "Print Day Details:"
     date = gets.chomp
     # dates = Date.strptime(strr, '%d-%m-%Y')
@@ -80,10 +80,9 @@ class Shop
     puts "Average:  #{if orderss.length == 0  then "0"
                     else 
                         orderss.map(&:amount).reduce(&:+)/(orderss.length) end}"
-                            
   end
 
-  def print_month_details
+  def month_details
     puts "Print Month Details"
     str = gets.chomp.split(" ")
     month = str[0].to_i
@@ -134,5 +133,5 @@ class Shop
   end
 end
 
-shop = Shop.new
-shop.run
+view = View.new
+view.run
